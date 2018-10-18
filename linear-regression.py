@@ -2,18 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def compute_cost(y, y_pred):
-    cost = np.sum(np.square(y_pred - y)) / (2 * len(y))
-    return cost
-
-def linear_regression(theta, x_train, y, y_pred, learning_rate):
-    print(theta[0])
-    print((1/len(y)) * learning_rate * np.sum((y_pred - y) * x_train, axis = 0))
-
-    theta[0] -= (1/len(y)) * learning_rate * np.sum((y_pred - y) * x_train, axis = 0)
-
-    return theta
-
 
 
 # training set - force applied
@@ -23,29 +11,30 @@ y = np.array([[62], [36], [63], [129], [134], [237], [491], [361], [458], [945],
 
 x_train = np.append(x, np.ones(x.shape), axis = 1)
 
-# x = (x - x.mean())/x.std()
-# y = (y - y.mean())/y.std()
-
-# # Plot
-# plt.scatter(x, y)
-# plt.title('Scatter plot of the Training Data')
-# plt.xlabel('x')
-# plt.ylabel('y')
-# plt.show()
-
 # y = mx + c
 # parameters = m, c
 # start with the random values of m, class
 n = len(y)
 learning_rate = 0.0001
-epochs = 10
+epochs = 6
 
-theta = np.array([[1,1]])
+theta = np.array([[0.0,0.0]])
 
-
+# linear regression
 for i in range(epochs):
 
     y_pred = x_train @ theta.T
 
-    print('cost: ', compute_cost(y, y_pred))
-    theta = linear_regression(theta, x_train, y, y_pred, learning_rate)
+    cost = np.sum(np.square(y_pred - y)) / (2 * len(y))
+    print('cost: ', cost)
+    # regression step
+    theta[0] -= (1/len(y)) * learning_rate * np.sum((y_pred - y) * x_train, axis = 0)
+
+
+# Plot
+plt.scatter(x, y)
+plt.plot(x, y_pred, 'r')
+plt.title('Scatter plot of Prediction')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
