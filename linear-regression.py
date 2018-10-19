@@ -44,7 +44,7 @@ for i in range(epochs):
 # Plot
 plt.scatter(x_train[:,0], y_train)
 plt.plot(x_train[:,0], y_pred, 'r')
-plt.title('Scatter plot of Training')
+plt.title('Training')
 plt.xlabel('x_train')
 plt.ylabel('y_train')
 plt.show()
@@ -55,7 +55,7 @@ print('Testing with ' + str(len(x_test)) + ' tuples')
 y_test_pred = x_test @ theta.T
 plt.scatter(x_test[:,0], y_test)
 plt.plot(x_train[:,0], y_pred, 'r')
-plt.title('Scatter plot of Testing')
+plt.title('Testing')
 plt.xlabel('x_test')
 plt.ylabel('y_test')
 plt.show()
